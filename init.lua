@@ -1,0 +1,7 @@
+require('set')
+require("remap")
+require('packer-manage')
+require('vim-conf')
+require('color')
+require('lsp-config')
+require('comments')
