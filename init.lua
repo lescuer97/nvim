@@ -1,5 +1,5 @@
-require('vim-conf')
 require('set')
+require('vim-conf')
 require("remap")
 require('packer-manage')
 require('color')
