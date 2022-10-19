@@ -140,6 +140,11 @@ _G.packer_plugins = {
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/typescript.nvim",
     url = "https://github.com/jose-elias-alvarez/typescript.nvim"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/leo/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com//tpope/vim-fugitive"
+  },
   ["vim-vsnip"] = {
     loaded = true,
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/vim-vsnip",
