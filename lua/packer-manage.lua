@@ -20,7 +20,12 @@ return require('packer').startup(function()
   use 'simrat39/rust-tools.nvim'
   use 'jose-elias-alvarez/typescript.nvim'
   use 'hrsh7th/vim-vsnip'
-  use '/tpope/vim-fugitive'
+  use 'tpope/vim-fugitive'
+  use 'RishabhRD/nvim-lsputils'
+  use 'RishabhRD/popfix'
+      use("nvim-treesitter/nvim-treesitter", {
+        run = ":TSUpdate"
+    })
   use {
     'numToStr/Comment.nvim',
     config = function()

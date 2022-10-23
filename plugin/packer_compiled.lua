@@ -115,6 +115,16 @@ _G.packer_plugins = {
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-lsputils"] = {
+    loaded = true,
+    path = "/home/leo/.local/share/nvim/site/pack/packer/start/nvim-lsputils",
+    url = "https://github.com/RishabhRD/nvim-lsputils"
+  },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/home/leo/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -124,6 +134,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  popfix = {
+    loaded = true,
+    path = "/home/leo/.local/share/nvim/site/pack/packer/start/popfix",
+    url = "https://github.com/RishabhRD/popfix"
   },
   ["rust-tools.nvim"] = {
     loaded = true,
@@ -143,7 +158,7 @@ _G.packer_plugins = {
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/vim-fugitive",
-    url = "https://github.com//tpope/vim-fugitive"
+    url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-vsnip"] = {
     loaded = true,
