@@ -10,7 +10,14 @@ return require('packer').startup(function()
  use { 'ibhagwan/fzf-lua',
   -- optional for icon support
   requires = { 'kyazdani42/nvim-web-devicons' }
-} -- config for lsp
+}
+-- lualine 
+use {
+  'nvim-lualine/lualine.nvim',
+  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+}
+-- config for lsp
+
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
