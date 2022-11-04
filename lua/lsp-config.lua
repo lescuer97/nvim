@@ -60,6 +60,9 @@ lspconfig.tsserver.setup {
 }
 
 
+--GO LSP Setup
+require('go').setup()
+
 -- " Setup Completion
  --:" See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 local cmp = require'cmp'

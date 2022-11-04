@@ -19,6 +19,10 @@ use {
 -- config for lsp
 
   use 'neovim/nvim-lspconfig'
+  -- golang config
+  use 'ray-x/go.nvim'
+  use 'ray-x/guihua.lua' -- recommanded if need floating window support
+
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
