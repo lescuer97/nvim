@@ -1,4 +1,3 @@
-require('set')
 require('vim-conf')
 require("remap")
 require('packer-manage')

@@ -36,6 +36,10 @@ require("typescript").setup(opts)
 --GO LSP Setup
 require('go').setup(opts)
 
+
+-- luasnip setup
+local luasnip = require 'luasnip'
+
 -- " Setup Completion
 --:" See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 local cmp = require'cmp'
@@ -43,7 +47,7 @@ cmp.setup({
     -- Enable LSP snippets
     snippet = {
         expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
     mapping = {
