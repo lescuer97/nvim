@@ -165,20 +165,15 @@ _G.packer_plugins = {
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/popfix",
     url = "https://github.com/RishabhRD/popfix"
   },
-  ["rust-tools.nvim"] = {
+  ["symbols-outline.nvim"] = {
     loaded = true,
-    path = "/home/leo/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
-    url = "https://github.com/simrat39/rust-tools.nvim"
+    path = "/home/leo/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
+    url = "https://github.com/simrat39/symbols-outline.nvim"
   },
   ["tokyonight.nvim"] = {
     loaded = true,
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
-  },
-  ["typescript.nvim"] = {
-    loaded = true,
-    path = "/home/leo/.local/share/nvim/site/pack/packer/start/typescript.nvim",
-    url = "https://github.com/jose-elias-alvarez/typescript.nvim"
   },
   ["vim-fugitive"] = {
     loaded = true,

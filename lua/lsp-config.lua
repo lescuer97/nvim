@@ -1,3 +1,6 @@
+local nnoremap = require("keymap").nnoremap
+local inoremap = require("keymap").inoremap
+
 local lsp_defaults = {
     flags = {
         debounce_text_changes = 150,
@@ -10,11 +13,39 @@ local lsp_defaults = {
     end
 }
 local lspconfig = require('lspconfig')
-lspconfig.util.default_config = vim.tbl_deep_extend(
-'force',
-lspconfig.util.default_config,
-lsp_defaults
-)
+
+local function config(_config)
+    return vim.tbl_deep_extend("force", {
+        on_attach = function()
+            nnoremap("gD", function() vim.lsp.buf.declaration() end)
+            nnoremap("gd", function() vim.lsp.buf.definition() end)
+            nnoremap("K", function() vim.lsp.buf.hover() end)
+            nnoremap("<leader>vws", function() vim.lsp.buf.workspace_symbol() end)
+            nnoremap("<leader>vd", function() vim.diagnostic.open_float() end)
+            nnoremap("[d", function() vim.diagnostic.goto_next() end)
+            nnoremap("]d", function() vim.diagnostic.goto_prev() end)
+            nnoremap("<leader>vca", function() vim.lsp.buf.code_action() end)
+            nnoremap("<leader>vco", function() vim.lsp.buf.code_action({
+                filter = function(code_action)
+                    if not code_action or not code_action.data then
+                        return false
+                    end
+
+                    local data = code_action.data.id
+                    return string.sub(data, #data - 1, #data) == ":0"
+                end,
+                apply = true
+            }) end)
+            nnoremap("<leader>vrr", function() vim.lsp.buf.references() end)
+            nnoremap("<leader>vrn", function() vim.lsp.buf.rename() end)
+            inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
+        end,
+    }, _config or {})
+end
+
+-- luasnip setup
+local luasnip = require 'luasnip'
+
 local opts = {
     tools = { -- rust-tools options
     autoSetHints = true,
@@ -29,30 +60,9 @@ debug = false, -- enable debug logging for commands
 go_to_source_definition = {
     fallback = true, -- fall back to standard LSP definition on failure
 },
- server = {
-    -- on_attach is a callback called when the language server attachs to the buffer
-    on_attach = on_attach,
-    settings = {
-      -- to enable rust-analyzer settings visit:
-      -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-      ["rust-analyzer"] = {
-        -- enable clippy on save
-        checkOnSave = {
-          command = "clippy",
-        },
-      },
-    },
-},
 }
-require('rust-tools').setup(opts)
-require("typescript").setup(opts)
 
---GO LSP Setup
-require('go').setup(opts)
-
-
--- luasnip setup
-local luasnip = require 'luasnip'
+require("symbols-outline").setup(opts)
 
 -- " Setup Completion
 --:" See https://github.com/hrsh7th/nvim-cmp#basic-configuration
@@ -107,18 +117,31 @@ cmp.setup({
     },
 })
 -- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lspconfig.denols.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
+lspconfig.denols.setup(config({
+    -- capabilities = capabilities,
     root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-}
-lspconfig.tsserver.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
+}))
+
+lspconfig.tsserver.setup(config({
+    -- capabilities = capabilities,
     root_dir = lspconfig.util.root_pattern("package.json"),
-}
+}))
+lspconfig.rust_analyzer.setup(config({
+    
+    -- capabilities = capabilities,
+   cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+    --[[
+    settings = {
+        rust = {
+            unstable_features = true,
+            build_on_save = false,
+            all_features = true,
+        },
+    }
+    --]]
+}))
 -- lsputils config
 --
 local bufnr = vim.api.nvim_buf_get_number(0)

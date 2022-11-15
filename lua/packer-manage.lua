@@ -19,6 +19,7 @@ use {
 -- config for lsp
 
   use 'neovim/nvim-lspconfig'
+  use 'simrat39/symbols-outline.nvim'
   -- golang config
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua' -- recommanded if need floating window support
@@ -29,8 +30,6 @@ use {
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use 'hrsh7th/nvim-cmp'
-  use 'simrat39/rust-tools.nvim'
-  use 'jose-elias-alvarez/typescript.nvim'
   use 'hrsh7th/vim-vsnip'
   use 'tpope/vim-fugitive'
   use 'RishabhRD/nvim-lsputils'
@@ -44,5 +43,6 @@ use {
         require('Comment').setup()
     end
 }
+
 end
   )
