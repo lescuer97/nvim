@@ -1,17 +1,6 @@
 local nnoremap = require("keymap").nnoremap
 local inoremap = require("keymap").inoremap
 
-local lsp_defaults = {
-    flags = {
-        debounce_text_changes = 150,
-    },
-    capabilities = require('cmp_nvim_lsp').default_capabilities(
-    vim.lsp.protocol.make_client_capabilities()
-    ),
-    on_attach = function(client, bufnr)
-        vim.api.nvim_exec_autocmds('User', {pattern = 'LspAttached'})
-    end
-}
 local lspconfig = require('lspconfig')
 
 local function config(_config)
@@ -80,8 +69,6 @@ cmp.setup({
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
         -- Add tab support
-        ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-        ['<Tab>'] = cmp.mapping.select_next_item(),
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -130,8 +117,31 @@ lspconfig.tsserver.setup(config({
     -- capabilities = capabilities,
     root_dir = lspconfig.util.root_pattern("package.json"),
 }))
+lspconfig.sumneko_lua.setup(config({
+	settings = {
+		Lua = {
+			runtime = {
+				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+				version = "LuaJIT",
+				-- Setup your lua path
+				path = vim.split(package.path, ";"),
+			},
+			diagnostics = {
+				-- Get the language server to recognize the `vim` global
+				globals = { "vim" },
+			},
+			workspace = {
+				-- Make the server aware of Neovim runtime files
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+				},
+			},
+		},
+	},
+}))
+
 lspconfig.rust_analyzer.setup(config({
-    
     -- capabilities = capabilities,
    cmd = { "rustup", "run", "nightly", "rust-analyzer" },
     --[[
@@ -144,38 +154,3 @@ lspconfig.rust_analyzer.setup(config({
     }
     --]]
 }))
--- lsputils config
---
--- local bufnr = vim.api.nvim_buf_get_number(0)
-
--- vim.lsp.handlers['textDocument/codeAction'] = function(_, _, actions)
---     require('lsputil.codeAction').code_action_handler(nil, actions, nil, nil, nil)
--- end
---
--- vim.lsp.handlers['textDocument/references'] = function(_, _, result)
---     require('lsputil.locations').references_handler(nil, result, { bufnr = bufnr }, nil)
--- end
---
--- vim.lsp.handlers['textDocument/definition'] = function(_, method, result)
---     require('lsputil.locations').definition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
--- end
---
--- vim.lsp.handlers['textDocument/declaration'] = function(_, method, result)
---     require('lsputil.locations').declaration_handler(nil, result, { bufnr = bufnr, method = method }, nil)
--- end
---
--- vim.lsp.handlers['textDocument/typeDefinition'] = function(_, method, result)
---     require('lsputil.locations').typeDefinition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
--- end
---
--- vim.lsp.handlers['textDocument/implementation'] = function(_, method, result)
---     require('lsputil.locations').implementation_handler(nil, result, { bufnr = bufnr, method = method }, nil)
--- end
---
--- vim.lsp.handlers['textDocument/documentSymbol'] = function(_, _, result, _, bufn)
---     require('lsputil.symbols').document_handler(nil, result, { bufnr = bufn }, nil)
--- end
---
--- vim.lsp.handlers['textDocument/symbol'] = function(_, _, result, _, bufn)
---     require('lsputil.symbols').workspace_handler(nil, result, { bufnr = bufn }, nil)
--- end
