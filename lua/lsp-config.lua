@@ -106,44 +106,68 @@ cmp.setup({
     },
 })
 -- Set up lspconfig.
--- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+-- install deno https://deno.land/manual@v1.28.1/getting_started/installation
 lspconfig.denols.setup(config({
+
     -- capabilities = capabilities,
     root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 }))
 
+-- need to install typescript-language-server and typescript. 
 lspconfig.tsserver.setup(config({
     -- capabilities = capabilities,
     root_dir = lspconfig.util.root_pattern("package.json"),
 }))
-lspconfig.sumneko_lua.setup(config({
-	settings = {
-		Lua = {
-			runtime = {
-				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-				version = "LuaJIT",
-				-- Setup your lua path
-				path = vim.split(package.path, ";"),
-			},
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = { "vim" },
-			},
-			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = {
-					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-				},
-			},
-		},
-	},
+
+-- need to install vscode-langservers-extracted and move to PATH
+lspconfig.cssls.setup(config({
+    capabilities = capabilities,
 }))
 
+-- need to install vscode-langservers-extracted and move to PATH
+lspconfig.html.setup(config({
+    filetypes = {"html"},
+    init_options = {
+        configurationSection = {"html", "css", "javascript"},
+        embeddedLanguages ={
+            css = true, 
+            javascript = true
+        },
+    },
+    capabilities = capabilities,
+}))
+
+-- need to install install lua lsp https://github.com/sumneko/lua-language-server and move to PATH
+lspconfig.sumneko_lua.setup(config({
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = "LuaJIT",
+                -- Setup your lua path
+                path = vim.split(package.path, ";"),
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = {
+                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                },
+            },
+        },
+    },
+}))
+
+-- need to install install rust-analyzer lsp https://rust-analyzer.github.io/ and add to PATH
 lspconfig.rust_analyzer.setup(config({
     -- capabilities = capabilities,
-   cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+    cmd = { "rustup", "run", "nightly", "rust-analyzer" },
     --[[
     settings = {
         rust = {
