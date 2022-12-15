@@ -1,4 +1,5 @@
 local nnoremap = require("keymap").nnoremap
+local vnoremap = require("keymap").vnoremap
 local FzfLua = require("fzf-lua");
 
 nnoremap("<leader>pv", "<cmd>Ex<CR>")
@@ -10,3 +11,4 @@ nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
 nnoremap("n", "nzz")
 nnoremap("N", "Nzz")
+vnoremap("<leader>y" , '"+y');
