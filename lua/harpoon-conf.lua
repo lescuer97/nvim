@@ -3,10 +3,14 @@ local ui = require("harpoon.ui");
 local nnoremap = require("keymap").nnoremap
 
 nnoremap("<leader>a", mark.add_file)
+nnoremap("<leader>r", mark.rm_file)
 nnoremap("<leader>h", ui.toggle_quick_menu)
+nnoremap("<leader>e", function ()
+    mark.clear_all();
+end )
 
 nnoremap("<leader>1",function ()
-  ui.nav_file(1)
+  ui.nav_file(1);
 end )
 nnoremap("<leader>2",function ()
   ui.nav_file(2);
