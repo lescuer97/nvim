@@ -34,6 +34,8 @@ use 'hrsh7th/vim-vsnip'
 use 'tpope/vim-fugitive'
 use 'RishabhRD/nvim-lsputils'
 use 'RishabhRD/popfix'
+use 'nvim-lua/plenary.nvim'
+use 'ThePrimeagen/harpoon'
 use("nvim-treesitter/nvim-treesitter", {
     run = ":TSUpdate"
 })
@@ -52,6 +54,7 @@ use {
         require('Comment').setup()
     end
 }
+
 
 end
 )

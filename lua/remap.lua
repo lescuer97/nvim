@@ -1,6 +1,5 @@
 local nnoremap = require("keymap").nnoremap
 local vnoremap = require("keymap").vnoremap
-local FzfLua = require("fzf-lua");
 
 nnoremap("<leader>pv", "<cmd>Ex<CR>")
 nnoremap( "<C-p>",  "<cmd>lua require('fzf-lua').files({ cmd = 'fdfind -I --exclude build/ --exclude node_modules/ --exclude archive/' })<CR>") 
