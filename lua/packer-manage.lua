@@ -40,12 +40,8 @@ use("nvim-treesitter/nvim-treesitter", {
     run = ":TSUpdate"
 })
 use {
-    "romgrk/nvim-treesitter-context",
+    "nvim-treesitter/nvim-treesitter-context",
     requires = { "nvim-treesitter/nvim-treesitter" }, -- nvim-treesitter-context depends on nvim-treesitter
-    config = function()
-        local ctx = require "treesitter-context"
-        ctx.setup {}
-    end,
 }
 use {
 
