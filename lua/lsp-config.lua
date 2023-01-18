@@ -27,6 +27,14 @@ lsp.configure('sumneko_lua', {
     }
 })
 
+lsp.configure('tsserver', {
+  single_file_support = false,
+  root_dir = require('lspconfig.util').root_pattern('package.json')
+})
+lsp.configure('denols', {
+  root_dir = require('lspconfig.util').root_pattern("deno.json", "deno.jsonc"),
+})
+
 lsp.on_attach(function(client, bufnr)
     -- local opts = {buffer = bufnr, remap = false}
 
