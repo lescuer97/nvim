@@ -34,6 +34,9 @@ lsp.configure('tsserver', {
 lsp.configure('denols', {
   root_dir = require('lspconfig.util').root_pattern("deno.json", "deno.jsonc"),
 })
+lsp.configure('elmls', {
+  root_dir = require('lspconfig.util').root_pattern("elm.json"),
+})
 
 lsp.on_attach(function(client, bufnr)
     -- local opts = {buffer = bufnr, remap = false}
