@@ -35,7 +35,7 @@ lsp.configure('denols', {
   root_dir = require('lspconfig.util').root_pattern("deno.json", "deno.jsonc"),
 })
 lsp.configure('elmls', {
-  root_dir = require('lspconfig.util').root_pattern("elm.json"),
+  root_dir = require('lspconfig.util').root_pattern("elm.json", "elm.js"),
 })
 
 lsp.on_attach(function(client, bufnr)

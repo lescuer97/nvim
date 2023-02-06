@@ -6,6 +6,7 @@ nnoremap( "<C-p>",  "<cmd>lua require('fzf-lua').files({ cmd = 'fdfind  --exclud
 nnoremap( "<C-g>",  "<cmd>lua require('fzf-lua').live_grep_glob({filter = [[rg --invert-match 'node_modules/|designer/|designer/|build/|archive/|templates/|dist/|.git/|Cargo.lock|package-lock.json|LICENSES.txt|LICENSES.json']]})<CR>") 
 nnoremap("<C-h>","<cmd>tabprevious<CR>")
 nnoremap("<C-l>", "<cmd>tabnext<CR>")
+nnoremap("<C-n>", "<cmd>tabnew<CR>")
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
 nnoremap("n", "nzz")
