@@ -7,7 +7,7 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
     'tsserver',
-    'sumneko_lua',
+   'lua_ls',
     'rust_analyzer',
     'denols',
     'cssls',
@@ -17,7 +17,7 @@ lsp.ensure_installed({
 })
 
 -- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
     settings = {
         Lua = {
             diagnostics = {
@@ -34,7 +34,7 @@ lsp.configure('tsserver', {
 lsp.configure('denols', {
   root_dir = require('lspconfig.util').root_pattern("deno.json", "deno.jsonc"),
 })
-lsp.configure('elmls', {
+     lsp.configure('elmls', {
   root_dir = require('lspconfig.util').root_pattern("elm.json", "elm.js"),
 })
 
@@ -66,6 +66,7 @@ lsp.on_attach(function(client, bufnr)
     nnoremap("<leader>vrn", function() vim.lsp.buf.rename() end)
     inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
 end)
+
 
 lsp.setup()
 
