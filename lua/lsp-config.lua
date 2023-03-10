@@ -39,18 +39,19 @@ lsp.configure('denols', {
 })
 
 lsp.on_attach(function(client, bufnr)
-    -- local opts = {buffer = bufnr, remap = false}
+    local opts = {buffer = bufnr, remap = false}
 
-    nnoremap("gD", function() vim.lsp.buf.declaration() end)
+    nnoremap("gD", function() vim.lsp.buf.declaration() end, opts)
 
-    nnoremap("gd", ':vsplit | lua vim.lsp.buf.definition()<CR>')
-    -- nnoremap("gd", function()vim.tab.split(); vim.lsp.buf.definition() end)
-    nnoremap("K", function() vim.lsp.buf.hover() end)
-    nnoremap("<leader>vws", function() vim.lsp.buf.workspace_symbol() end)
-    nnoremap("<leader>vd", function() vim.diagnostic.open_float() end)
-    nnoremap("[d", function() vim.diagnostic.goto_next() end)
-    nnoremap("]d", function() vim.diagnostic.goto_prev() end)
-    nnoremap("<leader>vca", function() vim.lsp.buf.code_action() end)
+    nnoremap("gd", function() vim.lsp.buf.definition() end, opts)
+    -- nnoremap("<leader>gd", ':vsplit | lua vim.lsp.buf.definition()<CR>')
+    -- nnoremap("gd", function()vim.tab.split(); vim.lsp.buf.definition() end, opts)
+    nnoremap("K", function() vim.lsp.buf.hover() end, opts)
+    nnoremap("<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+    nnoremap("<leader>vd", function() vim.diagnostic.open_float() end, opts)
+    nnoremap("[d", function() vim.diagnostic.goto_next() end, opts)
+    nnoremap("]d", function() vim.diagnostic.goto_prev() end, opts)
+    nnoremap("<leader>vca", function() vim.lsp.buf.code_action() end, opts)
     nnoremap("<leader>vco", function() vim.lsp.buf.code_action({
         filter = function(code_action)
             if not code_action or not code_action.data then
@@ -61,10 +62,10 @@ lsp.on_attach(function(client, bufnr)
             return string.sub(data, #data - 1, #data) == ":0"
         end,
         apply = true
-    }) end)
-    nnoremap("<leader>vrr", function() vim.lsp.buf.references() end)
-    nnoremap("<leader>vrn", function() vim.lsp.buf.rename() end)
-    inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
+    }) end, opts)
+    nnoremap("<leader>vrr", function() vim.lsp.buf.references() end, opts)
+    nnoremap("<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+    inoremap("<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
 
