@@ -62,6 +62,9 @@ use {
     end
 }
 
+-- COPILOT
+use 'github/copilot.vim'
+
 
 end
 )
