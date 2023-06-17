@@ -1,31 +1,41 @@
 local nnoremap = require("keymap").nnoremap
 local inoremap = require("keymap").inoremap
 
-local lsp = require("lsp-zero")
+-- local lsp = require("lsp-zero")
 
-lsp.preset("recommended")
+vim.opt.signcolumn = 'yes'
 
-lsp.ensure_installed({
-    'tsserver',
-   'lua_ls',
-    'rust_analyzer',
-    'denols',
-    'cssls',
-    'html',
-    'gopls',
-
+local lsp = require('lsp-zero').preset({
+  name = 'minimal',
+  set_lsp_keymaps = true,
+  manage_nvim_cmp = true,
+  suggest_lsp_servers = false,
 })
+
+-- (Optional) Configure lua language server for neovim
+lsp.nvim_workspace()
+
+-- lsp.ensure_installed({
+--     'tsserver',
+--    'lua_ls',
+--     'rust_analyzer',
+--     'denols',
+--     'cssls',
+--     'html',
+--     'gopls',
+--     'solargraph',
+-- })
 
 -- Fix Undefined global 'vim'
-lsp.configure('lua_ls', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
+-- lsp.configure('lua_ls', {
+--     settings = {
+--         Lua = {
+--             diagnostics = {
+--                 globals = { 'vim' }
+--             }
+--         }
+--     }
+-- })
 
 lsp.configure('tsserver', {
   single_file_support = false,
