@@ -27,15 +27,28 @@ lsp.nvim_workspace()
 -- })
 
 -- Fix Undefined global 'vim'
--- lsp.configure('lua_ls', {
---     settings = {
---         Lua = {
---             diagnostics = {
---                 globals = { 'vim' }
---             }
---         }
---     }
--- })
+lsp.configure('lua_ls', {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+})
+
+ lsp.configure('rust_analyzer', {
+     settings = {
+         ["rust-analyzer"] = {
+         cargo = {
+            features = {"jwt", "totp"},
+        },
+        procMacro = {
+                enable = true
+            },
+    },
+     },
+ })
 
 lsp.configure('tsserver', {
   single_file_support = false,
