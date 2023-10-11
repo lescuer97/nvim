@@ -27,6 +27,10 @@ vim.diagnostic.config({
 
 
 lsp_zero.on_attach(function(client, bufnr)
+    lsp_zero.default_setup({
+        buffer = bufnr,
+        preserve_mappings = false,
+    })
   local opts = {buffer = bufnr, remap = false}
     nnoremap("gD", function() vim.lsp.buf.declaration() end, opts)
 
@@ -69,11 +73,54 @@ require('mason-lspconfig').setup({
     'gopls',
     },
 handlers = {
-    lsp_zero.default_setup,
     lua_ls = function()
       local lua_opts = lsp_zero.nvim_lua_ls()
       require('lspconfig').lua_ls.setup(lua_opts)
     end,
+
+    rust_analyzer = function()
+        require('lspconfig').rust_analyzer.setup({
+          capabilities = lsp_zero.get_capabilities(),
+          settings = {
+            ["rust-analyzer"] = {
+              cargo = {
+                features = { "jwt", "totp" },
+              },
+              procMacro = {
+                enable = true,
+              },
+            },
+          },
+        })
+    end,
+
+    denols = function ()
+        require('lspconfig').denols.setup({
+            capabilities = lsp_zero.get_capabilities(),
+            root_dir = require('lspconfig.util').root_pattern("deno.json", "deno.jsonc"),
+        })
+    end,
+
+    elmls = function ()
+        require('lspconfig').elmls.setup({
+            capabilities = lsp_zero.get_capabilities(),
+            root_dir = require('lspconfig.util').root_pattern("elm.json", "elm.js"),
+        })
+    end,
+
+    svelte = function ()
+        require('lspconfig').svelte.setup({
+            capabilities = lsp_zero.get_capabilities(),
+            root_dir = require('lspconfig.util').root_pattern("svelte.config.js", "package.json", "svelte.config.cjs", "svelte.config.mjs", "svelte.config.ts"),
+        })
+    end,
+
+    tsserver = function ()
+        require('lspconfig').tsserver.setup({
+             capabilities = lsp_zero.get_capabilities(),
+             root_dir = require('lspconfig.util').root_pattern('package.json')
+        })
+    end
   },
 })
 
@@ -94,7 +141,7 @@ cmp.setup({
     {name = 'path'},
     {name = 'nvim_lsp'},
     {name = 'nvim_lua'},
-    {name = 'buffer', keyword_length = 3},
+    {name = 'buffer', keyword_length = 2},
     {name = 'luasnip', keyword_length = 2},
   },
   formatting = lsp_zero.cmp_format(),
@@ -102,7 +149,9 @@ cmp.setup({
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-y>'] = cmp.mapping.confirm({ select = false }),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({select = false}),
+    ['<Tab>'] = cmp_action.tab_complete(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 })
 })
 
