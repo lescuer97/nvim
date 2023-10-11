@@ -21,3 +21,10 @@ end )
 nnoremap("<leader>4",function ()
   ui.nav_file(4);
 end )
+nnoremap("<leader>5",function ()
+  ui.nav_file(5);
+end )
+nnoremap("<leader>6",function ()
+  ui.nav_file(6);
+end )
+
