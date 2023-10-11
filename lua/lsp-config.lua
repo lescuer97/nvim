@@ -13,7 +13,7 @@ lsp_zero.set_sign_icons({
 })
 
 vim.diagnostic.config({
-  virtual_text = false,
+  virtual_text = true,
   severity_sort = true,
   float = {
     style = 'minimal',
@@ -57,6 +57,7 @@ end)
 
 require('mason').setup({})
 
+
 require('mason-lspconfig').setup({
   ensure_installed = {
     'tsserver',
@@ -78,61 +79,30 @@ handlers = {
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_action = lsp_zero.cmp_action()
+
+require('luasnip.loaders.from_vscode').lazy_load()
+
+vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
 cmp.setup({
+  preselect = 'item',
+  completion = {
+    completeopt = 'menu,menuone,noinsert'
+  },
   sources = {
     {name = 'path'},
     {name = 'nvim_lsp'},
     {name = 'nvim_lua'},
+    {name = 'buffer', keyword_length = 3},
+    {name = 'luasnip', keyword_length = 2},
   },
   formatting = lsp_zero.cmp_format(),
   mapping = cmp.mapping.preset.insert({
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-y>'] = cmp.mapping.confirm({ select = false }),
     ['<C-Space>'] = cmp.mapping.complete(),
-  }),
 })
-
--- -- Fix Undefined global 'vim'
--- lsp.configure('lua_ls', {
---     settings = {
---         Lua = {
---             diagnostics = {
---                 globals = { 'vim' }
---             }
---         }
---     }
--- })
---
---  lsp.configure('rust_analyzer', {
---      settings = {
---          ["rust-analyzer"] = {
---          cargo = {
---             features = {"jwt", "totp"},
---         },
---         procMacro = {
---             enable = true
---         },
---     },
---      },
---  })
---
--- lsp.configure('tsserver', {
---   single_file_support = false,
---   root_dir = require('lspconfig.util').root_pattern('package.json')
--- })
--- lsp.configure('denols', {
---   root_dir = require('lspconfig.util').root_pattern("deno.json", "deno.jsonc"),
--- })
---      lsp.configure('elmls', {
---   root_dir = require('lspconfig.util').root_pattern("elm.json", "elm.js"),
--- })
-
-
-
--- vim.diagnostic.config({
---     virtual_text = true,
--- })
-
+})
 
