@@ -86,9 +86,12 @@ handlers = {
               cargo = {
                 features = { "jwt", "totp" },
               },
-              procMacro = {
-                enable = true,
-              },
+              -- diagnostics = {
+              --   disabled = { "unresolved-proc-macro" },
+              -- },
+              -- procMacro = {
+              --   enable = true,
+              -- },
             },
           },
         })
