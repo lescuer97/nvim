@@ -81,19 +81,19 @@ handlers = {
     rust_analyzer = function()
         require('lspconfig').rust_analyzer.setup({
           capabilities = lsp_zero.get_capabilities(),
-          settings = {
-            ["rust-analyzer"] = {
-              cargo = {
-                features = { "jwt", "totp" },
-              },
+          -- settings = {
+          --   ["rust-analyzer"] = {
+          --     cargo = {
+          --       features = { "jwt", "totp" },
+          --     },
               -- diagnostics = {
               --   disabled = { "unresolved-proc-macro" },
               -- },
               -- procMacro = {
               --   enable = true,
               -- },
-            },
-          },
+            -- },
+          -- },
         })
     end,
 
