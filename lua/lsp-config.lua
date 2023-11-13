@@ -26,7 +26,7 @@ vim.diagnostic.config({
 
 
 
-lsp_zero.on_attach(function(client, bufnr)
+lsp_zero.on_attach(function(_, bufnr)
     lsp_zero.default_setup({
         buffer = bufnr,
         preserve_mappings = false,
@@ -65,65 +65,24 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {
     'tsserver',
+    'eslint',
     'lua_ls',
     'rust_analyzer',
     'denols',
     'cssls',
     'html',
     'gopls',
+    'svelte',
+    'elmls',
+    'rubocop',
+    'ruby_ls'
     },
-handlers = {
-    lua_ls = function()
-      local lua_opts = lsp_zero.nvim_lua_ls()
-      require('lspconfig').lua_ls.setup(lua_opts)
-    end,
-
-    rust_analyzer = function()
-        require('lspconfig').rust_analyzer.setup({
-          capabilities = lsp_zero.get_capabilities(),
-          -- settings = {
-          --   ["rust-analyzer"] = {
-          --     cargo = {
-          --       features = { "jwt", "totp" },
-          --     },
-              -- diagnostics = {
-              --   disabled = { "unresolved-proc-macro" },
-              -- },
-              -- procMacro = {
-              --   enable = true,
-              -- },
-            -- },
-          -- },
-        })
-    end,
-
-    denols = function ()
-        require('lspconfig').denols.setup({
-            capabilities = lsp_zero.get_capabilities(),
-            root_dir = require('lspconfig.util').root_pattern("deno.json", "deno.jsonc"),
-        })
-    end,
-
-    elmls = function ()
-        require('lspconfig').elmls.setup({
-            capabilities = lsp_zero.get_capabilities(),
-            root_dir = require('lspconfig.util').root_pattern("elm.json", "elm.js"),
-        })
-    end,
-
-    svelte = function ()
-        require('lspconfig').svelte.setup({
-            capabilities = lsp_zero.get_capabilities(),
-            root_dir = require('lspconfig.util').root_pattern("svelte.config.js", "package.json", "svelte.config.cjs", "svelte.config.mjs", "svelte.config.ts"),
-        })
-    end,
-
-    tsserver = function ()
-        require('lspconfig').tsserver.setup({
-             capabilities = lsp_zero.get_capabilities(),
-             root_dir = require('lspconfig.util').root_pattern('package.json')
-        })
-    end
+    handlers = {
+      lsp_zero.default_setup,
+      lua_ls = function()
+        local lua_opts = lsp_zero.nvim_lua_ls()
+        require('lspconfig').lua_ls.setup(lua_opts)
+      end,
   },
 })
 
