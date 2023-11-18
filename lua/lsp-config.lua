@@ -73,9 +73,7 @@ require('mason-lspconfig').setup({
     'html',
     'gopls',
     'svelte',
-    'elmls',
-    'rubocop',
-    'ruby_ls'
+    'elmls'
     },
     handlers = {
       lsp_zero.default_setup,
