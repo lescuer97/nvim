@@ -81,6 +81,13 @@ require('mason-lspconfig').setup({
         local lua_opts = lsp_zero.nvim_lua_ls()
         require('lspconfig').lua_ls.setup(lua_opts)
       end,
+
+        denols = function ()
+        require('lspconfig').denols.setup({
+            capabilities = lsp_zero.get_capabilities(),
+            root_dir = require('lspconfig.util').root_pattern("deno.json", "deno.jsonc"),
+        })
+    end,
   },
 })
 
