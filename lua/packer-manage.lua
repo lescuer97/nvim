@@ -67,8 +67,6 @@ use {
     end
 }
 
--- COPILOT
-use 'github/copilot.vim'
 
 --tmux 
 use 'christoomey/vim-tmux-navigator'

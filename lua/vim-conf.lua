@@ -7,6 +7,11 @@ vim.opt.incsearch = true
 vim.opt.relativenumber = true
 vim.opt.splitright = true
 
+vim.opt.colorcolumn = "100"
+vim.opt.textwidth = 120
+vim.opt.spell = true
+vim.opt.linebreak = true
+vim.opt.spelllang = "en"
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
